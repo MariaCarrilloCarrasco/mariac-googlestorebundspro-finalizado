@@ -51,3 +51,14 @@ a {
   gap: 20px;
   list-style: none;
 }
+
+.links a:hover {
+  color: #202124;
+}
+
+.arrow {
+  padding: 30px;
+  display: flex;
+  gap: 10px;
+  margin: 30px;
+}
