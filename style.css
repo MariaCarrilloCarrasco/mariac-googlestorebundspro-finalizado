@@ -1,0 +1,13 @@
+:root {
+    --blanco: #ffffff;
+    --grisClaro: #f8f9fa;   
+    --gris: #57626b;
+    --grisOscuro: #353a49;
+    --azul: #1a73e8;
+    --fuentePrincipal: 'Inter', sans-serif;
+
+}
+
+body {
+    font-family: var(--fuentePrincipal);
+}
