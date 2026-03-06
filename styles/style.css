@@ -14,6 +14,21 @@ Cambiar de horizontal a vertical los elementos utilizamos flex **/
   --grisOscuro: #353a49;
   --azul: #1a73e8;
   --fuentePrincipal: "Inter", sans-serif;
+  --title-size: 35px;
+  --title-weight: bold;
+  --title-color: var(--grisOscuro);
+  --subtitle-size: 20px;
+  --subtitle-weight: bold;
+  --subtitle-color: var(--grisOscuro);
+  --text-size: 12px;
+  --text-weight: normal;
+  --text-color: var(--gris);
+  --textBlod-size: 12px;
+  --textBlod-weight: bold;
+  --textBlod-color: var(--gris);
+  --textFooter-size: 8px;
+  --textFooter-weight: normal;
+  --textFooter-color: var(--gris);
 }
 
 body {
