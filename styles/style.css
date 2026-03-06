@@ -30,7 +30,10 @@ Cambiar de horizontal a vertical los elementos utilizamos flex **/
   --textFooter-weight: normal;
   --textFooter-color: var(--gris);
 }
-
+button {
+  all: unset;
+  cursor: pointer;
+}
 body {
   font-family: var(--fuentePrincipal);
 }
