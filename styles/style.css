@@ -7,11 +7,12 @@
 /* Superusuario - root  */
 
 :root {
-  --blanco: #ffffff;
   --grisClaro: #f8f9fa;
   --gris: #57626b;
   --grisOscuro: #353a49;
   --azul: #1a73e8;
+  --azulBorde: rgba(26, 115, 232, 0.35);
+  --azulSombra: rgba(26, 115, 232, 0.1);
   --fuentePrincipal: "Inter", sans-serif;
   --title-size: 35px;
   --title-weight: bold;
@@ -24,9 +25,7 @@
   --text-color: var(--gris);
   --textBlod-size: 12px;
   --textBlod-weight: bold;
-  --textBlod-color: var(--gris);
   --textFooter-size: 8px;
-  --textFooter-weight: normal;
   --textFooter-color: var(--gris);
 }
 
@@ -37,6 +36,9 @@ button {
 
 body {
   font-family: var(--fuentePrincipal);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 nav {
@@ -45,7 +47,6 @@ nav {
   padding: 10px 30px;
   align-items: center;
   height: 60px;
-  width: 100%;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
 }
 
@@ -58,6 +59,12 @@ nav {
   color: var(--text-color);
   font-size: var(--text-size);
   font-weight: var(--text-weight);
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: var(--azul);
+  font-weight: bold;
 }
 
 .links_contain {
@@ -82,9 +89,15 @@ nav {
 .icons img {
   width: 20px;
   height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.icons img:hover {
+  transform: scale(1.2);
 }
 
 main {
+  flex: 1;
   padding: 20px 30px;
   display: flex;
   flex-direction: column;
@@ -114,6 +127,17 @@ article {
   background-color: var(--grisClaro);
   border-radius: 10px;
   padding: 20px;
+  border: 2px solid transparent;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+article:hover {
+  transform: scale(1.02);
+  border-color: var(--azulBorde);
+  box-shadow: 0 6px 20px var(--azulSombra);
 }
 
 .card_container {
@@ -128,7 +152,6 @@ article {
   justify-content: center;
   height: 280px;
   background-color: #f1f0e8;
-  gap: 20px;
 }
 
 .info_container {
@@ -152,7 +175,7 @@ article {
 }
 
 .add_to_cart {
-  background-color: #1a73e8;
+  background-color: var(--azul);
   color: white;
   padding: 20px 50px;
   border-radius: 5px;
@@ -162,6 +185,65 @@ article {
   font-size: var(--textBlod-size);
   font-weight: var(--textBlod-weight);
   text-decoration: none;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 15px 20px;
+  color: var(--textFooter-color);
+  background-color: var(--grisClaro);
+}
+
+footer > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Iconos sociales */
+.social-icons {
+  display: flex;
+  gap: 17px;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-icons img {
+  height: 22px;
+  display: block;
+}
+
+/* Enlaces y país */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--textFooter-color);
+  font-size: var(--textFooter-size);
+}
+
+.country_mobile {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--textFooter-size);
+}
+
+.country {
+  display: none;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--textFooter-size);
+}
+
+.country img {
+  width: 24px;
 }
 
 /* === TABLET === */
@@ -188,17 +270,46 @@ article {
     align-items: center;
     justify-content: space-between;
   }
+
+  footer > div {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .footer-links {
+    flex-direction: row;
+    gap: 17px;
+    align-items: center;
+  }
+
+  .social-icons img {
+    height: 12px;
+  }
+
+  .country {
+    display: flex;
+  }
+
+  .country_mobile {
+    display: none;
+  }
 }
 
 /* === DESKTOP === */
 @media only screen and (min-width: 1024px) {
   /* Cambios para pantallas >= 1024px */
   main {
-    padding: 64px 100px;
+    padding: 30px 100px;
   }
 
   .card_container {
     gap: 50px;
     justify-content: center;
+  }
+
+  footer > div {
+    max-width: 1200px;
   }
 }
