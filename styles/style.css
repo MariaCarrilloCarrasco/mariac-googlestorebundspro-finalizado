@@ -29,13 +29,10 @@ Cambiar de horizontal a vertical los elementos utilizamos flex **/
   --textFooter-size: 8px;
   --textFooter-weight: normal;
   --textFooter-color: var(--gris);
-<<<<<<< HEAD
-=======
 }
 button {
   all: unset;
   cursor: pointer;
->>>>>>> main
 }
 body {
   font-family: var(--fuentePrincipal);
