@@ -10,7 +10,7 @@ Hola equipo! 👋 Esta guía explica paso a paso cómo trabajar en el repositori
 | ----------- | ------------------------------------------------------------- |
 | `main`      | Código final en producción. **Nadie sube aquí directamente.** |
 | `develop`   | Rama de integración. **Tampoco se sube directamente.**        |
-| `tu-nombre` | Tu rama personal. **Aquí es donde tú trabajas.**              |
+| `tu-rama` | Tu rama personal. **Aquí es donde tú trabajas.**              |
 
 > ⚠️ **Regla de oro:** Nunca hagas cambios directamente en `main` ni en `develop`. Todo tu trabajo va en tu rama personal.
 
