@@ -3,3 +3,120 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --blanco: #ffffff;
+  --grisClaro: #f8f9fa;
+  --gris: #57626b;
+  --grisOscuro: #353a49;
+  --azul: #1a73e8;
+  --fuentePrincipal: "Inter", sans-serif;
+  --title-size: 35px;
+  --title-weight: bold;
+  --title-color: var(--grisOscuro);
+  --subtitle-size: 20px;
+  --subtitle-weight: bold;
+  --subtitle-color: var(--grisOscuro);
+  --text-size: 12px;
+  --text-weight: normal;
+  --text-color: var(--gris);
+  --textBlod-size: 12px;
+  --textBlod-weight: bold;
+  --textBlod-color: var(--gris);
+  --textFooter-size: 8px;
+  --textFooter-weight: normal;
+  --textFooter-color: var(--gris);
+}
+
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: var(--grisClaro);
+  color: var(--textFooter-color);
+}
+
+.social-icons {
+  display: flex;
+  gap: 17px;
+  order: 1;
+  margin: 20px;
+}
+
+.social-icons img {
+  height: 22px;
+}
+
+.country {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  order: 3;
+  font-size: var(--textFooter-size);
+  padding: 5px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  order: 2;
+}
+
+.footer-links a {
+  font-size: var(--textFooter-size);
+}
+
+/* tablet*/
+@media (min-width: 768px) {
+  footer {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+
+  .footer-links {
+    flex-direction: row;
+    gap: 40px;
+    margin: 40px;
+  }
+
+  .social-icons img {
+    height: 12px;
+  }
+
+  .country {
+    order: 2;
+  }
+}
+
+/* Destop */
+@media (min-width: 1024px) {
+  footer {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 15px 20px;
+    gap: 5px;
+    background-color: var(--grisClaro);
+  }
+
+  .social-icons {
+    order: 1;
+    height: 12px;
+    align-items: center;
+  }
+
+  /* margin-left: auto empuja el País y los Links a la derecha  */
+  .country {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .footer-links {
+    order: 3;
+    flex-direction: row;
+  }
+}
