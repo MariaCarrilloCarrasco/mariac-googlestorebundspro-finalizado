@@ -36,7 +36,6 @@ footer {
   padding: 15px 20px;
   background-color: var(--grisClaro);
   color: var(--textFooter-color);
- 
 }
 
 .social-icons {
@@ -44,6 +43,9 @@ footer {
   gap: 17px;
   order: 1;
   margin: 20px;
+}
+
+.social-icons img {
   height: 22px;
 }
 
@@ -53,7 +55,9 @@ footer {
   gap: 5px;
   order: 3;
   font-size: var(--textFooter-size);
+  padding: 5px;
 }
+
 .footer-links {
   display: flex;
   flex-direction: column;
@@ -61,16 +65,39 @@ footer {
   gap: 5px;
   order: 2;
 }
+
 .footer-links a {
   font-size: var(--textFooter-size);
 }
 
+/* tablet*/
+@media (min-width: 768px) {
+  footer {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
 
+  .footer-links {
+    flex-direction: row;
+    gap: 40px;
+    margin: 40px;
+  }
+
+  .social-icons img {
+    height: 12px;
+  }
+
+  .country {
+    order: 2;
+  }
+}
+
+/* Destop */
 @media (min-width: 1024px) {
   footer {
     flex-direction: row;
     justify-content: flex-start;
-    /* Alinea todo a la izquierda */
     padding: 15px 20px;
     gap: 5px;
     background-color: var(--grisClaro);
@@ -78,21 +105,18 @@ footer {
 
   .social-icons {
     order: 1;
-    height: 22px;
+    height: 12px;
+    align-items: center;
   }
 
-  /* El truco: margin-left: auto empuja el País y los Links a la derecha */
+  /* margin-left: auto empuja el País y los Links a la derecha */
   .country {
     order: 2;
     margin-left: auto;
-    font-size: var(--textFooter-size);
-    padding: 30px;
-   
   }
-  
+
   .footer-links {
     order: 3;
     flex-direction: row;
-    gap: 40px;
   }
 }
