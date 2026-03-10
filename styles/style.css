@@ -188,7 +188,7 @@ footer {
     align-items: center;
   }
 
-  /* margin-left: auto empuja el País y los Links a la derecha */
+  /* margin-left: auto empuja el País y los Links a la derecha  */
   .country {
     order: 2;
     margin-left: auto;
