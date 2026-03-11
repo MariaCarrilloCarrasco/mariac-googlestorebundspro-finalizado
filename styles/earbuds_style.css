@@ -1,9 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 main {
   padding: 20px;
   display: flex;
@@ -18,7 +12,7 @@ main > a {
   text-decoration: none;
   color: var(--text-color);
   font-size: var(--text-size);
-  font-weight: var(--text-weigth);
+  font-weight: var(--text-weight);
 }
 
 section {
@@ -47,12 +41,7 @@ figure {
   padding: 10px;
 }
 
-.info_product {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
+.info_product,
 .description {
   display: flex;
   flex-direction: column;
@@ -60,7 +49,7 @@ figure {
 }
 
 .price_summary {
-  color: var(--subtitle-color);
+  color: var(--title-color);
   font-weight: var(--subtitle-weight);
   font-size: var(--subtitle-size);
 }
@@ -128,12 +117,12 @@ hr {
 
 /* The selection shows an outline. */
 .colors input[type="radio"]:checked + .color-swatch {
-  outline: 1px solid #444;
+  outline: 1px solid var(--gray-dark);
 }
 
 /* Hover over the unselected ones */
 .color-swatch:hover {
-  outline: 1px solid #aaa;
+  outline: 1px solid var(--gray);
 }
 
 .purchase_details {
@@ -212,7 +201,6 @@ select:focus {
   }
 
   section {
-    gap: 25px;
     display: grid;
     grid-template-columns: 2fr 1fr;
   }

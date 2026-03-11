@@ -4,8 +4,6 @@
   box-sizing: border-box;
 }
 
-/* Superusuario - root  */
-
 /* === CUSTOM PROPERTIES === */
 :root {
   /* Colors */
@@ -14,6 +12,7 @@
   --gray: #57626b;
   --gray-dark: #353a49;
   --blue: #1a73e8;
+  --beige: #f1f0e8;
 
   /* Typography */
   --font-primary: "Inter", sans-serif;
@@ -24,18 +23,14 @@
 
   --subtitle-size: 20px;
   --subtitle-weight: bold;
-  --subtitle-color: var(--gray-dark);
 
   --text-size: 12px;
   --text-weight: normal;
   --text-color: var(--gray);
 
   --text-bold-weight: bold;
-  --text-bold-color: var(--gray);
 
   --text-footer-size: 8px;
-  --text-footer-weight: normal;
-  --text-footer-color: var(--gray);
 }
 
 body {
@@ -170,7 +165,7 @@ article:hover {
   display: flex;
   justify-content: center;
   height: 280px;
-  background-color: #f1f0e8;
+  background-color: var(--beige);
 }
 
 .info_container {
@@ -187,11 +182,6 @@ article:hover {
   gap: 5px;
 }
 
-.info p {
-  font-size: var(--text-size);
-  font-weight: var(--text-weight);
-  color: var(--text-color);
-}
 
 .add_to_cart {
   background-color: var(--blue);
@@ -211,7 +201,7 @@ footer {
   display: flex;
   justify-content: center;
   padding: 15px 20px;
-  color: var(--text-footer-color);
+  color: var(--text-color);
   background-color: var(--gray-light);
 }
 
@@ -244,7 +234,7 @@ footer > div {
 
 .footer-links a {
   text-decoration: none;
-  color: var(--text-footer-color);
+  color: var(--text-color);
   font-size: var(--text-footer-size);
 }
 
