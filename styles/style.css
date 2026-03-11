@@ -30,10 +30,12 @@ Cambiar de horizontal a vertical los elementos utilizamos flex **/
   --textFooter-weight: normal;
   --textFooter-color: var(--gris);
 }
+
 button {
   all: unset;
   cursor: pointer;
 }
+
 body {
   font-family: var(--fuentePrincipal);
 }
@@ -74,7 +76,7 @@ a {
 main {
   padding: 40px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   gap: 20px;
 }
 
@@ -89,33 +91,36 @@ main {
 section {
   gap: 25px;
   display: grid;
-  grid-template-columns: 2fr 1fr ;
+  grid-template-columns: 2fr 1fr;
 }
 
 .photos {
   display: flex;
-  align-items: center; 
+  align-items: center;
   gap: 23px;
   height: 400px;
-  }
+}
 
 .thumbnails {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-.thumbnails div{
+
+.thumbnails div {
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
- border:0.5px solid var(--gris) ;
-  border-radius: 50%; 
+  border: 0.5px solid var(--gris);
+  border-radius: 50%;
 }
+
 .thumbnails img {
   height: 50px;
 }
+
 .image {
   background-color: var(--grisClaro);
   border-radius: 20px;
@@ -125,6 +130,7 @@ section {
   align-items: center;
   justify-content: center;
 }
+
 .image img {
   width: 400px;
 }
