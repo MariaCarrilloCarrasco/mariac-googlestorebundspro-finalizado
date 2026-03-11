@@ -4,14 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Google Store</title>
-
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="./img/google-logo.png" />
-
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles/style.css" />
-
-    <!-- Google Fonts: preconnect improves load performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,98 +16,92 @@
 
   <body>
     <!-- ===================== NAVIGATION ===================== -->
-    <!-- Contains the logo, main nav links, and icon actions -->
     <nav aria-label="Main navigation">
-      <!-- Logo + nav links grouped on the left -->
       <div class="links_contain">
-        <img src="img/google-logo.png" alt="logo" />
+        <a href="#"><img src="./img/google-logo.png" alt="logo" /></a>
 
-        <!-- Main nav links — hidden on mobile, visible on tablet+ (see CSS media query) -->
-        <!-- aria-current="page" marks the active page for accessibility and active link styling -->
         <ul class="links">
           <li><a href="#">Phones</a></li>
-          <li><a href="#" aria-current="page">Earbuds</a></li>
-          <li><a href="./pages/watches.html">Watches</a></li>
+          <li>
+            <a href="../pages/earbuds.html" aria-current="page">Earbuds</a>
+          </li>
+          <li><a href="../pages/watches.html">Watches</a></li>
           <li><a href="#">Smart Home</a></li>
           <li><a href="#">Accessories</a></li>
           <li><a href="#">Subscriptions</a></li>
         </ul>
       </div>
 
-      <!-- Action icons on the right: search, help, cart, user account, and hamburger menu -->
-      <!-- The hamburger (.menu) is visible on mobile and hidden on tablet+ -->
       <ul class="icons">
         <li>
-          <a href="#"><img src="img/icons/Search.svg" alt="Search" /></a>
+          <a href="#"><img src="./img/icons/Search.svg" alt="Search" /></a>
         </li>
         <li>
-          <a href="#"><img src="img/icons/Help.svg" alt="Help" /></a>
+          <a href="#"><img src="./img/icons/Help.svg" alt="Help" /></a>
         </li>
         <li>
-          <a href="#"><img src="img/icons/Cart.svg" alt="Cart" /></a>
+          <a href="#"><img src="./img/icons/Cart.svg" alt="Cart" /></a>
         </li>
         <li>
-          <a href="#"><img src="img/icons/Avatar.svg" alt="User account" /></a>
+          <a href="#"
+            ><img src="./img/icons/Avatar.svg" alt="User account"
+          /></a>
         </li>
         <li class="menu">
-          <a href="#"><img src="img/icons/icons-menu.svg" alt="Open menu" /></a>
+          <a href="#"
+            ><img src="./img/icons/icons-menu.svg" alt="Open menu"
+          /></a>
         </li>
       </ul>
     </nav>
-    <!-- END NAVIGATION -->
 
     <!-- ===================== MAIN CONTENT ===================== -->
     <main>
-      <!-- Back button to return to the product listing -->
-      <a href="../index.html" class="btn_back">
-        <img src="../img/icons/Arrow.svg" alt="arrow" />
+      <a href="#" class="btn_back">
+        <img src="./img/icons/Arrow.svg" alt="arrow" />
         See product details
       </a>
 
-      <!-- Product detail section: gallery on the left, info on the right -->
       <section>
-        <!-- Left column: product image gallery -->
         <div>
           <figure>
-            <!-- Thumbnail list for selecting a product image -->
             <div class="thumbnails">
               <div>
                 <img
-                  src="../img/earbuds/earbuds_01.png"
+                  src="./img/earbuds/earbuds_01.png"
                   alt="Google Pixel Buds Pro - vista frontal con estuche abierto"
                 />
               </div>
               <div>
                 <img
-                  src="../img/earbuds/earbuds_02.png"
+                  src="./img/earbuds/earbuds_02.png"
                   alt="Google Pixel Buds Pro - vista lateral"
                 />
               </div>
               <div>
                 <img
-                  src="../img/earbuds/earbuds_03.png"
+                  src="./img/earbuds/earbuds_03.png"
                   alt="Google Pixel Buds Pro - auricular derecho"
                 />
               </div>
               <div>
                 <img
-                  src="../img/earbuds/earbuds_04.png"
+                  src="./img/earbuds/earbuds_04.png"
                   alt="Google Pixel Buds Pro - estuche cerrado"
                 />
               </div>
             </div>
 
-            <!-- Main product image (updates when a thumbnail is selected) -->
             <div class="image">
-              <img src="../img/earbuds/earbuds_01.png" alt="earbuds_01" />
+              <img
+                src="./img/earbuds/earbuds_01.png"
+                alt="Google Pixel Buds Pro - vista frontal con estuche abierto"
+              />
             </div>
           </figure>
         </div>
-        <!-- END left column -->
 
-        <!-- Right column: product info, color picker, purchase options -->
-        <div class="infor_product">
-          <!-- Product title, category and price summary -->
+        <div class="info_product">
           <div class="description">
             <h1>Google Pixel Buds Pro</h1>
             <p>Music & Sound</p>
@@ -124,8 +112,7 @@
 
           <!-- Color selector and purchase actions -->
           <div class="purchase">
-            <!-- Color swatches — each div represents a color option -->
-            <fieldset>
+            <div class="colors">
               <input type="radio" name="color" id="color-blue" checked />
               <label for="color-blue" class="color-swatch swatch-blue"></label>
 
@@ -149,32 +136,31 @@
 
               <input type="radio" name="color" id="color-red" />
               <label for="color-red" class="color-swatch swatch-red"></label>
-            </fieldset>
+            </div>
 
-            <!-- Quantity selector, add to cart, and delivery info -->
             <div class="purchase_details">
               <p class="price_purchase">229 €</p>
               <hr />
-              <select name="quantity" id="quantity">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-              <button>Add to cart</button>
+              <div>
+                <select name="quantity" id="quantity">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <button>Add to cart</button>
+              </div>
 
               <div class="delivery">
-                <img src="../img/icons/Delivery.svg" alt="Delivers" />
+                <img src="./img/icons/Delivery.svg" alt="Delivers" />
                 <p>Delivers 29 Apr to <span>08023</span></p>
               </div>
             </div>
           </div>
         </div>
-        <!-- END right column -->
       </section>
     </main>
-    <!-- END MAIN CONTENT -->
 
     <!-- ===================== FOOTER ===================== -->
     <footer>
@@ -204,6 +190,5 @@
         </div>
       </div>
     </footer>
-    <!-- END FOOTER -->
   </body>
 </html>

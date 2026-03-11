@@ -14,22 +14,28 @@
       rel="stylesheet"
     />
   </head>
-
   <body>
+    <!-- ===================== NAVIGATION ===================== -->
     <nav>
       <div class="links_contain">
-        <img src="../img/google-logo.png" alt="logo" />
+        <a href="../index.html"
+          ><img src="../img/google-logo.png" alt="logo"
+        /></a>
+
         <ul class="links">
           <li><a href="#">Phones</a></li>
-          <li><a href="../index.html">Earbuds</a></li>
           <li>
-            <a href="./pages/watches.html" aria-current="page">Watches</a>
+            <a href="../index.html">Earbuds</a>
+          </li>
+          <li>
+            <a href="../pages/watches.html" aria-current="page">Watches</a>
           </li>
           <li><a href="#">Smart Home</a></li>
           <li><a href="#">Accessories</a></li>
           <li><a href="#">Subscriptions</a></li>
         </ul>
       </div>
+
       <ul class="icons">
         <li>
           <a href="#"><img src="../img/icons/Search.svg" alt="buscador" /></a>
@@ -44,17 +50,93 @@
           <a href="#"><img src="../img/icons/Avatar.svg" alt="usuario" /></a>
         </li>
         <li class="menu">
-          <a href="#"
-            ><img src="../img/icons/icons-menu.svg" alt="usuario"
-          /></a>
+          <a href="#"><img src="../img/icons/icons-menu.svg" alt="menú" /></a>
         </li>
       </ul>
     </nav>
-    
-    <main></main>
 
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main>
+      <a href="#" class="btn_back">
+        <img src="../img/icons/Arrow.svg" alt="arrow" />
+        See product details
+      </a>
+
+      <section>
+        <div>
+          <figure>
+            <div class="image">
+              <img
+                src="../img/smartwatch/smartwatch_black.png"
+                alt="Google Pixel Buds Pro - vista frontal con estuche abierto"
+              />
+            </div>
+          </figure>
+        </div>
+
+        <div class="info_product">
+          <div class="description">
+            <h1>Fitbit Inspire 3</h1>
+            <p>Health & Fitness Tracker</p>
+            <p class="price_summary">99,95 €</p>
+            <hr />
+            <p>Choose a Color</p>
+          </div>
+
+          <!-- Color selector and purchase actions -->
+          <div class="purchase">
+            <div class="watch-colors">
+              <input type="radio" name="color" id="color-midnight" checked />
+              <label for="color-midnight" class="watch-swatch swatch-midnight">
+                <img
+                  src="../img/smartwatch/smartwatch_black.png"
+                  alt="Midnight Zen"
+                />
+                <span>Midnight<br> Zen</span>
+              </label>
+
+              <input type="radio" name="color" id="color-lilac" />
+              <label for="color-lilac" class="watch-swatch swatch-lilac">
+                <img src="../img/smartwatch/smartwatch_pink.png" alt="Lilac Bliss" />
+                <span>Lilac<br> Bliss</span>
+              </label>
+
+              <input type="radio" name="color" id="color-morning" />
+              <label for="color-morning" class="watch-swatch swatch-morning">
+                <img
+                  src="../img/smartwatch/smartwatch_yellow.png"
+                  alt="Morning Glow"
+                />
+                <span>Morning<br> Glow</span>
+              </label>
+            </div>
+
+            <div class="purchase_details">
+              <p class="price_purchase">99,95 €</p>
+              <hr />
+              <select name="quantity" id="quantity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <button>Add to cart</button>
+
+              <div class="delivery">
+                <img src="../img/icons/Delivery.svg" alt="Delivers" />
+                <p>Delivers 29 Apr to <span>08023</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
     <footer>
       <div>
+        <!-- Social media links -->
         <div class="social-icons">
           <a href="#"><img src="../img/icons/SM-x.svg" alt="X" /></a>
           <a href="#"
@@ -69,6 +151,7 @@
           <a href="#"><img src="../img/icons/SM-tiktok.svg" alt="TikTok" /></a>
         </div>
 
+        <!-- Legal links and country selector -->
         <div class="footer-links">
           <a href="#">Privacy</a>
           <a href="#">Google Nest Commitment to Privacy</a>
