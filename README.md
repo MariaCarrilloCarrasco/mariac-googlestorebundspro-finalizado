@@ -1,172 +1,161 @@
-# 📘 Guía de trabajo en equipo — 02-Ejercicio-Google-Store
+# Google Store — Product Showcase
 
-Hola equipo! 👋 Esta guía explica paso a paso cómo trabajar en el repositorio sin romper nada. Léela con calma antes de empezar.
-
----
-
-## 🌿 ¿Cómo está organizado el repositorio?
-
-| Rama        | Para qué sirve                                                |
-| ----------- | ------------------------------------------------------------- |
-| `main`      | Código final en producción. **Nadie sube aquí directamente.** |
-| `develop`   | Rama de integración. **Tampoco se sube directamente.**        |
-| `tu-rama` | Tu rama personal. **Aquí es donde tú trabajas.**              |
-
-> ⚠️ **Regla de oro:** Nunca hagas cambios directamente en `main` ni en `develop`. Todo tu trabajo va en tu rama personal.
+A pixel-perfect, responsive product detail page replicating the Google Store experience. Built as a Figma-to-code exercise using semantic HTML5 and CSS3, featuring two product pages: **Google Pixel Buds Pro** and **Fitbit Inspire 3**.
 
 ---
 
-## 🚀 Flujo de trabajo paso a paso
+## Live Preview
 
-### 1️⃣ Abre tu proyecto en VS Code
+| Page | Description |
+|------|-------------|
+| `index.html` | Google Pixel Buds Pro — earbuds product detail |
+| `pages/watches.html` | Fitbit Inspire 3 — health & fitness tracker detail |
 
-Abre la carpeta del proyecto en VS Code. Puedes hacerlo desde la terminal integrada con:
+---
 
-```bash
-code .
+## Features
+
+- **Mobile-first responsive design** — seamless across mobile, tablet, and desktop
+- **Interactive color selector** — swatches with live product image preview (watches)
+- **Accessible markup** — semantic HTML5, ARIA attributes, descriptive alt texts, and proper form label associations
+- **CSS Grid + Flexbox layout** — two-column desktop layout with sticky purchase panel
+- **No JavaScript** — all interactivity handled with CSS (`:checked`, `:hover`, transitions)
+- **Google Fonts** — Inter typeface (400, 700)
+- **SVG icon system** — 18 scalable UI icons (navigation, social media, utility)
+
+---
+
+## Tech Stack
+
+| Technology | Usage |
+|------------|-------|
+| HTML5 | Semantic structure, forms, accessibility |
+| CSS3 | Custom properties, Flexbox, Grid, media queries |
+| Google Fonts | Inter typeface |
+| SVG | Scalable UI and social icons |
+
+---
+
+## Project Structure
+
+```
+02-Ejercicio-Google-Store/
+├── index.html               # Pixel Buds Pro product page
+├── pages/
+│   └── watches.html         # Fitbit Inspire 3 product page
+├── styles/
+│   ├── style.css            # Base stylesheet (shared, mobile-first)
+│   └── watches_style.css    # Watches page overrides
+└── img/
+    ├── google-logo.png
+    ├── earbuds/             # 4 product images
+    ├── smartwatch/          # 3 product images (black, pink, yellow)
+    └── icons/               # 18 SVG icons
 ```
 
 ---
 
-### 2️⃣ Verifica en qué rama estás
+## CSS Architecture
 
-Antes de tocar cualquier archivo, asegúrate de estar en **tu rama personal**.
+Styles follow a **mobile-first** strategy with progressive enhancement via media queries:
 
-Abre la terminal de VS Code (`Ctrl + ñ` o `View > Terminal`) y escribe:
+| Breakpoint | Behavior |
+|------------|----------|
+| `< 768px` | Single column, hidden nav links, stacked buttons |
+| `768px – 1023px` | Nav links visible, 2×2 color grid |
+| `≥ 1024px` | Two-column grid, thumbnail gallery, side-by-side purchase panel |
 
-```bash
-git branch
+**Design tokens** (CSS custom properties):
+
+```css
+--white, --gray-light, --gray, --gray-dark, --blue, --beige
+
+--font-primary: "Inter", sans-serif
+--title-size: 35px
+--subtitle-size: 20px
+--text-size: 12px
 ```
-
-Verás una lista de ramas. La que tiene `*` al lado es en la que estás. Debe ser la tuya (por ejemplo `feat/...`).
 
 ---
 
-### 3️⃣ Cámbiate a tu rama si no estás en ella
+## Getting Started
+
+No build tools or dependencies required. Clone the repo and open `index.html` in any modern browser.
 
 ```bash
-git checkout nombre-de-tu-rama
+git clone https://github.com/Adriasu09/02-Ejercicio-Google-Store.git
+cd 02-Ejercicio-Google-Store
+# Open index.html in your browser
 ```
-
-> 💡 Reemplaza `nombre-de-tu-rama` con el nombre de tu rama real. Ejemplo: `git checkout feat/...`
 
 ---
 
-### 4️⃣ Actualiza tu rama con los últimos cambios de `develop`
+## Git Workflow
 
-Antes de empezar a trabajar, sincroniza tu rama para no quedarte atrás:
+This project follows a **feature branch workflow**:
+
+```
+main ← develop ← feat/your-feature
+```
+
+| Branch | Purpose |
+|--------|---------|
+| `main` | Production-ready code. No direct commits. |
+| `develop` | Integration branch. No direct commits. |
+| `feat/*` | Your personal working branch. |
+
+### Daily workflow
 
 ```bash
+# 1. Switch to your branch
+git checkout feat/your-feature
+
+# 2. Sync with latest changes from develop
 git pull origin develop
-```
 
-> 🔄 Esto trae los cambios más recientes que ya fueron aprobados al proyecto.
+# 3. Work on your files...
 
----
-
-### 5️⃣ Trabaja en tus archivos
-
-Ahora sí puedes editar, crear o modificar archivos en VS Code con tranquilidad.
-
----
-
-### 6️⃣ Guarda tus cambios con Git
-
-Cuando termines (o quieras guardar avance), sigue estos tres pasos:
-
-**Paso A — Ver qué archivos cambiaste:**
-
-```bash
-git status
-```
-
-Los archivos en rojo son los que modificaste y aún no guardaste en Git.
-
-**Paso B — Agregar los archivos:**
-
-```bash
+# 4. Stage and commit your changes
 git add .
+git commit -m "feat(section): brief description of change"
+
+# 5. Push to remote
+git push origin feat/your-feature
+
+# 6. Open a Pull Request on GitHub targeting develop
 ```
 
-> El punto `.` significa "agrega todos los cambios". Puedes también agregar uno por uno con `git add nombre-del-archivo`.
+### Commit message convention
 
-**Paso C — Hacer el commit (guardar con mensaje):**
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-```bash
-git commit -m "descripción breve de lo que hiciste"
+```
+feat(navbar): add responsive hamburger menu
+fix(footer): correct social icon alignment on mobile
+refactor(styles): remove unused CSS custom properties
+improve(index): enhance semantic markup and alt texts
 ```
 
-> ✏️ Ejemplos de buenos mensajes:
->
-> - `"agrego sección de productos"`
-> - `"corrijo error en el navbar"`
-> - `"añado estilos al footer"`
+### Common errors
+
+| Error | Fix |
+|-------|-----|
+| `Please commit your changes before merge` | Run `git add . && git commit -m "your message"` first |
+| `Rejected — non-fast-forward` | Run `git pull origin feat/your-feature`, resolve conflicts, then push again |
+| Working on wrong branch | Run `git checkout feat/your-feature` |
 
 ---
 
-### 7️⃣ Sube tu rama a GitHub
+## Contributing
 
-```bash
-git push origin nombre-de-tu-rama
-```
-
-> 💡 Ejemplo: `git push origin feat/...`
-
----
-
-### 8️⃣ Crea un Pull Request en GitHub
-
-Un Pull Request (PR) es una solicitud para que tu código sea revisado y luego unido a `develop`.
-
-1. Ve al repositorio en GitHub: [github.com/Adriasu09/02-Ejercicio-Google-Store](https://github.com/Adriasu09/02-Ejercicio-Google-Store)
-2. Verás un banner amarillo que dice **"Compare & pull request"** → haz clic ahí
-3. Asegúrate de que la configuración sea:
-   - **base:** `develop` ← hacia donde va tu código
-   - **compare:** `nombre-de-tu-rama` ← tu rama con los cambios
-4. Escribe un **título claro** que describa qué hiciste
-5. En la descripción puedes explicar brevemente los cambios
-6. Haz clic en **"Create pull request"** ✅
-
-> ⏳ A partir de aquí, Adriana revisará tu PR. Puede que te deje comentarios pidiendo ajustes. Si eso pasa, no te preocupes — es parte del proceso de aprendizaje!
+1. Branch off from `develop` — never commit directly to `main` or `develop`
+2. Keep commits small and focused on a single change
+3. Write descriptive commit messages using Conventional Commits format
+4. Open a Pull Request against `develop` with a clear title and description
+5. Address any review comments before the PR is merged
 
 ---
 
-### 9️⃣ Si te piden hacer cambios en el PR
+## License
 
-1. Vuelve a VS Code
-2. Asegúrate de estar en tu rama: `git checkout nombre-de-tu-rama`
-3. Haz los cambios que te pidieron
-4. Repite los pasos 6 y 7 (add → commit → push)
-5. El PR se actualizará automáticamente en GitHub 🔄
-
----
-
-## ❓ Errores comunes
-
-**"You are not on the right branch"**
-→ Usa `git checkout nombre-de-tu-rama` para cambiarte a tu rama.
-
-**"Please commit your changes or stash them before you merge"**
-→ Tienes cambios sin guardar. Haz `git add .` y `git commit -m "tu mensaje"` primero.
-
-**"Rejected — non-fast-forward"**
-→ Alguien hizo cambios antes que tú. Corre `git pull origin nombre-de-tu-rama` primero y luego vuelve a intentar el push.
-
----
-
-## 💬 Resumen rápido (para tener a mano)
-
-```bash
-git checkout nombre-de-tu-rama          # cambiarte a tu rama
-git pull origin develop         # actualizar con lo último
-# ... trabajas en VS Code ...
-git status                      # ver cambios
-git add .                       # preparar cambios
-git commit -m "tu mensaje"      # guardar cambios
-git push origin nombre-de-tu-rama       # subir a GitHub
-# → Ir a GitHub y abrir el Pull Request
-```
-
----
-
-> 🙌 Cualquier duda, pregúntale a Adriana antes de hacer algo que no estés segura. ¡Es mejor preguntar que romper el código!
+This project was created for educational purposes as part of the [Factoria F5](https://factoriaf5.org/) bootcamp curriculum.
