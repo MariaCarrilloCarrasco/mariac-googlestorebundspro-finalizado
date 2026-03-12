@@ -68,7 +68,7 @@ Styles follow a **mobile-first** strategy with progressive enhancement via media
 **Design tokens** (CSS custom properties):
 
 ```css
---white, --gray-light, --gray, --gray-dark, --blue, --beige
+--white, --gray-light, --gray, --gray-dark, --blue
 
 --font-primary: "Inter", sans-serif
 --title-size: 35px

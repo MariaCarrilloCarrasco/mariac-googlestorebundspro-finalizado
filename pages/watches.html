@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fitbit Inspire 3 — health and fitness tracker with heart rate monitoring. Available in 3 colors. Shop on the Google Store." />
     <title>Google Store</title>
     <link rel="icon" type="image/png" href="../img/google-logo.png" />
     <link rel="stylesheet" href="../styles/style.css" />
@@ -16,7 +17,7 @@
   </head>
   <body>
     <!-- ===================== NAVIGATION ===================== -->
-    <nav>
+    <nav aria-label="Main navigation">
       <div class="links_contain">
         <a href="../index.html"
           ><img src="../img/google-logo.png" alt="logo"
@@ -38,19 +39,19 @@
 
       <ul class="icons">
         <li>
-          <a href="#"><img src="../img/icons/Search.svg" alt="buscador" /></a>
+          <a href="#"><img src="../img/icons/Search.svg" alt="Search" /></a>
         </li>
         <li>
-          <a href="#"><img src="../img/icons/Help.svg" alt="ayuda" /></a>
+          <a href="#"><img src="../img/icons/Help.svg" alt="Help" /></a>
         </li>
         <li>
-          <a href="#"> <img src="../img/icons/Cart.svg" alt="carrito" /></a>
+          <a href="#"><img src="../img/icons/Cart.svg" alt="Cart" /></a>
         </li>
         <li>
-          <a href="#"><img src="../img/icons/Avatar.svg" alt="usuario" /></a>
+          <a href="#"><img src="../img/icons/Avatar.svg" alt="User account" /></a>
         </li>
         <li class="menu">
-          <a href="#"><img src="../img/icons/icons-menu.svg" alt="menú" /></a>
+          <a href="#"><img src="../img/icons/icons-menu.svg" alt="Open menu" /></a>
         </li>
       </ul>
     </nav>
@@ -68,7 +69,7 @@
             <div class="image">
               <img
                 src="../img/smartwatch/smartwatch_black.png"
-                alt="Google Pixel Buds Pro - vista frontal con estuche abierto"
+                alt="Fitbit Inspire 3 - Midnight Zen"
               />
             </div>
           </figure>
@@ -80,12 +81,12 @@
             <p>Health & Fitness Tracker</p>
             <p class="price_summary">99,95 €</p>
             <hr />
-            <p>Choose a Color</p>
+            <p id="color-label">Choose a Color</p>
           </div>
 
           <!-- Color selector and purchase actions -->
           <div class="purchase">
-            <div class="watch-colors">
+            <fieldset class="watch-colors" aria-labelledby="color-label">
               <input type="radio" name="color" id="color-midnight" checked />
               <label for="color-midnight" class="watch-swatch swatch-midnight">
                 <img
@@ -121,12 +122,13 @@
                   Glow</span
                 >
               </label>
-            </div>
+            </fieldset>
 
             <div class="purchase_details">
               <p class="price_purchase">99,95 €</p>
               <hr />
               <div class="select_quantity">
+                <label for="quantity" class="sr-only">Quantity</label>
                 <select name="quantity" id="quantity">
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -138,7 +140,7 @@
               </div>
 
               <div class="delivery">
-                <img src="../img/icons/Delivery.svg" alt="Delivers" />
+                <img src="../img/icons/Delivery.svg" alt="Free delivery" />
                 <p>Delivers 29 Apr to <span>08023</span></p>
               </div>
             </div>
@@ -152,17 +154,17 @@
       <div>
         <!-- Social media links -->
         <div class="social-icons">
-          <a href="#"><img src="../img/icons/SM-x.svg" alt="X" /></a>
+          <a href="#"><img src="../img/icons/SM-x.svg" alt="X" loading="lazy" /></a>
           <a href="#"
-            ><img src="../img/icons/SM-instagram.svg" alt="Instagram"
+            ><img src="../img/icons/SM-instagram.svg" alt="Instagram" loading="lazy"
           /></a>
           <a href="#"
-            ><img src="../img/icons/SM-facebook.svg" alt="Facebook"
+            ><img src="../img/icons/SM-facebook.svg" alt="Facebook" loading="lazy"
           /></a>
           <a href="#"
-            ><img src="../img/icons/SM-youtube.svg" alt="YouTube"
+            ><img src="../img/icons/SM-youtube.svg" alt="YouTube" loading="lazy"
           /></a>
-          <a href="#"><img src="../img/icons/SM-tiktok.svg" alt="TikTok" /></a>
+          <a href="#"><img src="../img/icons/SM-tiktok.svg" alt="TikTok" loading="lazy" /></a>
         </div>
 
         <!-- Legal links and country selector -->

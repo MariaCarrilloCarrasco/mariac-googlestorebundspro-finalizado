@@ -43,6 +43,11 @@
   outline-offset: 1px;
 }
 
+.watch-colors input[type="radio"]:focus-visible + .watch-swatch {
+  outline: 1px solid var(--blue);
+  outline-offset: 1px;
+}
+
 .watch-swatch:hover {
   border-color: var(--gray-dark);
 }
