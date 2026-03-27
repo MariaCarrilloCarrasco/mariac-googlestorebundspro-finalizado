@@ -94,6 +94,6 @@ export const productsData = [
       },
     ],
 
-    extraStylesheet: "../styles/watches_style.css",
+    extraStylesheet: "../styles/watches-style.css",
   },
 ];
