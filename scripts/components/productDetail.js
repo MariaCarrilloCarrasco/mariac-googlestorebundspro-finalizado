@@ -117,7 +117,7 @@ export function renderProductDetail(product, imgPrefix = "../") {
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-              <button>Add to cart</button>
+              <button class="add_to_cart">Add to cart</button>
             </div>
             <div class="delivery">
               <img src="${imgPrefix}assets/icons/Delivery.svg" alt="Free delivery" />

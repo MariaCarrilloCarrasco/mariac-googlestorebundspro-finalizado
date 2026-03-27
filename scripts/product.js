@@ -2,6 +2,7 @@ import { productsData } from "../config/productsData.js";
 import { renderNav } from "./components/nav.js";
 import { renderFooter } from "./components/footer.js";
 import { renderProductDetail } from "./components/productDetail.js";
+import { initCartUI } from "./cart/cartController.js";
 
 const root = document.getElementById("root");
 
@@ -21,6 +22,7 @@ if (!product) {
     </main>
     ${renderFooter("../")}
   `;
+  initCartUI(root, "../", productsData);
 } else {
   // ── Include an additional stylesheet if the product requires it ─────────────────
   if (product.extraStylesheet) {
@@ -39,6 +41,8 @@ if (!product) {
     </main>
     ${renderFooter("../")}
   `;
+
+  initCartUI(root, "../", productsData);
 
   const heroImage = document.getElementById("hero-image");
 

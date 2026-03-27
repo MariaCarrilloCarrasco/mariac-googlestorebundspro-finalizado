@@ -1,3 +1,5 @@
+import { renderCartDropdown } from "./cartDropdown.js";
+
 export function renderNav(activeCategory, imgPrefix = "./") {
   const isNested = imgPrefix === "../";
 
@@ -37,8 +39,9 @@ export function renderNav(activeCategory, imgPrefix = "./") {
           <a href="#"><img src="${imgPrefix}assets/icons/Help.svg" alt="Help" /></a>
         </li>
         <li class="cart-icon">
-          <a href="#"><img src="${imgPrefix}assets/icons/Cart.svg" alt="Cart" /></a>
+          <a href="#" class="cart-icon__toggle"><img src="${imgPrefix}assets/icons/Cart.svg" alt="Cart" /></a>
           <span class="cart-badge" id="cart-badge"></span>
+          ${renderCartDropdown(imgPrefix)}
         </li>
         <li>
           <a href="#"><img src="${imgPrefix}assets/icons/Avatar.svg" alt="Account" /></a>
