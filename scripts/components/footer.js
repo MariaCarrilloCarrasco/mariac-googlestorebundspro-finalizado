@@ -3,11 +3,11 @@ export function renderFooter(imgPrefix = "./") {
     <footer>
       <div>
         <div class="social-icons">
-          <a href="#"><img src="${imgPrefix}img/icons/SM-x.svg" alt="X" /></a>
-          <a href="#"><img src="${imgPrefix}img/icons/SM-instagram.svg" alt="Instagram" /></a>
-          <a href="#"><img src="${imgPrefix}img/icons/SM-facebook.svg" alt="Facebook" /></a>
-          <a href="#"><img src="${imgPrefix}img/icons/SM-youtube.svg" alt="YouTube" /></a>
-          <a href="#"><img src="${imgPrefix}img/icons/SM-tiktok.svg" alt="TikTok" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/SM-x.svg" alt="X" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/SM-instagram.svg" alt="Instagram" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/SM-facebook.svg" alt="Facebook" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/SM-youtube.svg" alt="YouTube" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/SM-tiktok.svg" alt="TikTok" /></a>
         </div>
         <div class="footer-links">
           <a href="#">Privacy</a>
@@ -15,7 +15,7 @@ export function renderFooter(imgPrefix = "./") {
           <a href="#">Sales Terms</a>
           <a href="#">Terms of Service</a>
           <div class="country">
-            <img src="${imgPrefix}img/icons/Spain.svg" alt="Spain" /> Spain
+            <img src="${imgPrefix}assets/icons/Spain.svg" alt="Spain" /> Spain
           </div>
         </div>
       </div>

@@ -4,8 +4,8 @@ function renderThumbnails(thumbnails, imgPrefix) {
   const items = thumbnails
     .map(
       (thumb, index) => `
-        <div class="${index === 0 ? "active" : ""}" data-src="${imgPrefix}img/${thumb.src}">
-          <img src="${imgPrefix}img/${thumb.src}" alt="${thumb.alt}" />
+        <div class="${index === 0 ? "active" : ""}" data-src="${imgPrefix}assets/img/${thumb.src}">
+          <img src="${imgPrefix}assets/img/${thumb.src}" alt="${thumb.alt}" />
         </div>
       `
     )
@@ -49,9 +49,9 @@ function renderCardColors(colors, imgPrefix) {
         <label
           for="${color.id}"
           class="watch-swatch ${color.cssClass}"
-          data-image="${imgPrefix}img/${color.image}"
+          data-image="${imgPrefix}assets/img/${color.image}"
         >
-          <img src="${imgPrefix}img/${color.image}" alt="${color.label.replace(/<br\s*\/?>/gi, " ")}" />
+          <img src="${imgPrefix}assets/img/${color.image}" alt="${color.label.replace(/<br\s*\/?>/gi, " ")}" />
           <span>${color.label}</span>
         </label>
       `
@@ -75,7 +75,7 @@ export function renderProductDetail(product, imgPrefix = "../") {
 
   return `
     <a href="${homePath}" class="btn_back">
-      <img src="${imgPrefix}img/icons/Arrow.svg" alt="Back" />
+      <img src="${imgPrefix}assets/icons/Arrow.svg" alt="Back" />
       See product details
     </a>
 
@@ -86,7 +86,7 @@ export function renderProductDetail(product, imgPrefix = "../") {
           <div class="image">
             <img
               id="hero-image"
-              src="${imgPrefix}img/${product.heroImage.src}"
+              src="${imgPrefix}assets/img/${product.heroImage.src}"
               alt="${product.heroImage.alt}"
             />
           </div>
@@ -120,7 +120,7 @@ export function renderProductDetail(product, imgPrefix = "../") {
               <button>Add to cart</button>
             </div>
             <div class="delivery">
-              <img src="${imgPrefix}img/icons/Delivery.svg" alt="Free delivery" />
+              <img src="${imgPrefix}assets/icons/Delivery.svg" alt="Free delivery" />
               <p>Delivers ${product.deliveryDate} to <span>${product.deliveryZip}</span></p>
             </div>
           </div>

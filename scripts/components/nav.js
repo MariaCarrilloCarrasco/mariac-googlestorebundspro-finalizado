@@ -18,7 +18,7 @@ export function renderNav(activeCategory, imgPrefix = "./") {
     <nav aria-label="Main navigation">
       <div class="links_contain">
         <a href="${homePath}">
-          <img src="${imgPrefix}img/google-logo.png" alt="Google Store" />
+          <img src="${imgPrefix}assets/icons/google-logo.png" alt="Google Store" />
         </a>
         <ul class="links">
           <li><a href="#">Phones</a></li>
@@ -31,20 +31,20 @@ export function renderNav(activeCategory, imgPrefix = "./") {
       </div>
       <ul class="icons">
         <li>
-          <a href="#"><img src="${imgPrefix}img/icons/Search.svg" alt="Search" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/Search.svg" alt="Search" /></a>
         </li>
         <li>
-          <a href="#"><img src="${imgPrefix}img/icons/Help.svg" alt="Help" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/Help.svg" alt="Help" /></a>
         </li>
         <li class="cart-icon">
-          <a href="#"><img src="${imgPrefix}img/icons/Cart.svg" alt="Cart" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/Cart.svg" alt="Cart" /></a>
           <span class="cart-badge" id="cart-badge"></span>
         </li>
         <li>
-          <a href="#"><img src="${imgPrefix}img/icons/Avatar.svg" alt="Account" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/Avatar.svg" alt="Account" /></a>
         </li>
         <li class="menu">
-          <a href="#"><img src="${imgPrefix}img/icons/icons-menu.svg" alt="Menu" /></a>
+          <a href="#"><img src="${imgPrefix}assets/icons/icons-menu.svg" alt="Menu" /></a>
         </li>
       </ul>
     </nav>

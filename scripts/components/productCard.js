@@ -2,7 +2,7 @@ export function renderProductCard(product) {
   return `
     <article data-href="./pages/product.html?id=${product.id}">
       <div class="img_container">
-        <img src="./img/${product.cardImage.src}" alt="${product.cardImage.alt}" />
+        <img src="./assets/img/${product.cardImage.src}" alt="${product.cardImage.alt}" />
       </div>
       <div class="info_container">
         <div class="info">
