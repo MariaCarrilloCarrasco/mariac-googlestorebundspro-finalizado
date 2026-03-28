@@ -150,7 +150,7 @@ nav {
   height: 20px;
 }
 
-.icon{
+.icon {
   width: 20px;
   height: 20px;
   transition: transform 0.2s ease;
@@ -185,17 +185,6 @@ article {
   border-radius: 10px;
   padding: 20px;
   border: 2px solid transparent;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-article:hover {
-  transform: scale(1.02);
-  border-color: var(--blue);
-  box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3);
 }
 
 .card_container {
@@ -370,6 +359,20 @@ footer > div {
 @media only screen and (min-width: 1024px) {
   main {
     padding: 30px 100px;
+  }
+
+  article {
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  article:hover {
+    transform: scale(1.02);
+    border-color: var(--blue);
+    box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3);
   }
 
   .card_container {
