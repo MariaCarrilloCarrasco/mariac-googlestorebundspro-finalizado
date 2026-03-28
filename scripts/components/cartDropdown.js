@@ -15,9 +15,9 @@ function renderCartItems(cart, imgPrefix) {
           <span class="cart-dropdown__price">${formatPrice(item.price)}</span>
         </div>
         <div class="cart-dropdown__qty">
-          <img src="/assets/icons/plus-sm.png" alt="plus" class="cart-qty-plus" data-product-id="${item.id}">
+          <img src="${imgPrefix}/assets/icons/plus-sm.png" alt="plus" class="cart-qty-plus" data-product-id="${item.id}">
           <span class="cart-dropdown__count">${item.count}</span>
-          <img src="/assets/icons/minus-sm.png" alt="minus" class="cart-qty-minus" data-product-id="${item.id}">
+          <img src="${imgPrefix}/assets/icons/minus-sm.png" alt="minus" class="cart-qty-minus" data-product-id="${item.id}">
         </div>
       </div>`,
     )

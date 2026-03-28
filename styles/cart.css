@@ -173,8 +173,13 @@
 
 @media (max-width: 480px) {
   .cart-dropdown {
-    min-width: 280px;
-    right: -10px;
+    position: fixed;
+    top: 50px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    min-width: unset;
+    max-width: unset;
     padding: 16px;
   }
 }
