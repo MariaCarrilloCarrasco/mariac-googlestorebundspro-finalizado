@@ -95,7 +95,9 @@ export function initCartUI(root, imgPrefix, productsData) {
         const productId = params.get("id");
         const product = productsData.find((p) => p.id === productId);
         if (product) {
-          addToCart(product);
+          const quantitySelect = document.getElementById("quantity");
+          const quantity = quantitySelect ? parseInt(quantitySelect.value, 10) : 1;
+          addToCart(product, quantity);
           updateBadge();
           refreshDropdown(imgPrefix);
         }

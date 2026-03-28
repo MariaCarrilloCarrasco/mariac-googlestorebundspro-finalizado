@@ -20,19 +20,19 @@ export function saveCart(cart) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
 }
 
-export function addToCart(product) {
+export function addToCart(product, quantity = 1) {
   const cart = getCart();
   const existing = cart.find((item) => item.id === product.id);
 
   if (existing) {
-    existing.count += 1;
+    existing.count += quantity;
   } else {
     cart.push({
       id: product.id,
       name: product.name,
       price: parsePrice(product.price),
       img: product.cardImage.src,
-      count: 1,
+      count: quantity,
     });
   }
 
