@@ -35,7 +35,7 @@ export function renderCartDropdownBody(imgPrefix) {
   return `
     ${renderCartItems(cart, imgPrefix)}
     <div class="cart-dropdown__actions">
-      <button class="cart-dropdown__btn cart-dropdown__btn--go">Ir a la Cesta</button>
+      <a href="./cart.html" class="cart-dropdown__btn cart-dropdown__btn--go">Ir a la Cesta</a>
       <button class="cart-dropdown__btn cart-dropdown__btn--clear cart-clear">Limpiar cesta</button>
     </div>
     <div class="cart-dropdown__total">

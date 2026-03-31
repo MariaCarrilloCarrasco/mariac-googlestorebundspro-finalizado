@@ -23,34 +23,17 @@ function saveCart(cart) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
 }
 
-function addToCart(product, quantity = 1) {
-  const cart = getCart();
-  const existing = cart.find((item) => item.id === product.id);
-  if (existing) {
-    existing.count += quantity;
-  } else {
-    cart.push({
-      id: product.id,
-      name: product.name,
-      price: parsePrice(product.price),
-      img: product.cardImage.src,
-      count: quantity,
-    });
-  }
-  saveCart(cart);
-  return cart;
-}
-
 function updateQuantity(productId, delta) {
   let cart = getCart();
   const item = cart.find((i) => i.id === productId);
-  if (!item) return cart;
+  if (!item) return;
   item.count += delta;
-  if (item.count <= 0) {
-    cart = cart.filter((i) => i.id !== productId);
-  }
+  if (item.count <= 0) cart = cart.filter((i) => i.id !== productId);
   saveCart(cart);
-  return cart;
+}
+
+function removeFromCart(productId) {
+  saveCart(getCart().filter((i) => i.id !== productId));
 }
 
 function clearCart() {
@@ -66,9 +49,9 @@ function getCartTotals() {
 }
 
 // ============================================================
-// cartDropdown
+// cartDropdown (miniatura en la nav)
 // ============================================================
-function renderCartItems(cart, imgPrefix) {
+function renderNavCartItems(cart, imgPrefix) {
   if (cart.length === 0) {
     return `<p class="cart-dropdown__empty">El carrito está vacío.</p>`;
   }
@@ -90,7 +73,7 @@ function renderCartItems(cart, imgPrefix) {
             <img src="${imgPrefix}assets/icons/minus-sm.png" alt="" />
           </button>
         </div>
-      </div>`,
+      </div>`
     )
     .join("");
 }
@@ -98,11 +81,10 @@ function renderCartItems(cart, imgPrefix) {
 function renderCartDropdownBody(imgPrefix) {
   const cart = getCart();
   const { totalPrice } = getCartTotals();
-  const cartHref = imgPrefix === "../" ? "./cart.html" : "./pages/cart.html";
   return `
-    ${renderCartItems(cart, imgPrefix)}
+    ${renderNavCartItems(cart, imgPrefix)}
     <div class="cart-dropdown__actions">
-      <a href="${cartHref}" class="cart-dropdown__btn cart-dropdown__btn--go">Ir a la Cesta</a>
+      <a href="./cart.html" class="cart-dropdown__btn cart-dropdown__btn--go">Ir a la Cesta</a>
       <button class="cart-dropdown__btn cart-dropdown__btn--clear cart-clear">Limpiar cesta</button>
     </div>
     <div class="cart-dropdown__total">
@@ -146,17 +128,11 @@ function renderHelpModal() {
   `;
 }
 
-function renderNav(activeCategory, imgPrefix = "./") {
-  const isNested = imgPrefix === "../";
-  const homePath = isNested ? "../index.html" : "./index.html";
-  const earbudsHref = isNested
-    ? "./product.html?id=pixel-buds-pro"
-    : "./pages/product.html?id=pixel-buds-pro";
-  const watchesHref = isNested
-    ? "./product.html?id=fitbit-inspire-3"
-    : "./pages/product.html?id=fitbit-inspire-3";
-  const isActive = (category) =>
-    activeCategory === category ? 'aria-current="page"' : "";
+function renderNav(activeCategory, imgPrefix) {
+  const homePath = "../index.html";
+  const earbudsHref = "./product.html?id=pixel-buds-pro";
+  const watchesHref = "./product.html?id=fitbit-inspire-3";
+  const isActive = (cat) => (activeCategory === cat ? 'aria-current="page"' : "");
   return `
     <nav aria-label="Main navigation">
       <div class="links_contain">
@@ -177,18 +153,24 @@ function renderNav(activeCategory, imgPrefix = "./") {
           <a href="#"><img class="icon" src="${imgPrefix}assets/icons/Search.svg" alt="Search" /></a>
         </li>
         <li>
-          <a href="#" class="help-toggle" aria-label="Abrir ayuda"><img class="icon" src="${imgPrefix}assets/icons/Help.svg" alt="Help" /></a>
+          <a href="#" class="help-toggle" aria-label="Abrir ayuda">
+            <img class="icon" src="${imgPrefix}assets/icons/Help.svg" alt="Help" />
+          </a>
         </li>
         <li class="cart-icon">
-          <a href="#" class="cart-icon__toggle"><img class="icon" src="${imgPrefix}assets/icons/Cart.svg" alt="Cart" />
-          <span class="cart-badge" id="cart-badge"></span></a>
+          <a href="#" class="cart-icon__toggle">
+            <img class="icon" src="${imgPrefix}assets/icons/Cart.svg" alt="Cart" />
+            <span class="cart-badge" id="cart-badge"></span>
+          </a>
           ${renderCartDropdown(imgPrefix)}
         </li>
         <li>
           <a href="#"><img class="icon" src="${imgPrefix}assets/icons/Avatar.svg" alt="Account" /></a>
         </li>
         <li class="menu">
-          <a href="#" class="mobile-menu-toggle"><img class="icon" src="${imgPrefix}assets/icons/icons-menu.svg" alt="Menu" /></a>
+          <a href="#" class="mobile-menu-toggle">
+            <img class="icon" src="${imgPrefix}assets/icons/icons-menu.svg" alt="Menu" />
+          </a>
         </li>
       </ul>
     </nav>
@@ -209,7 +191,7 @@ function renderNav(activeCategory, imgPrefix = "./") {
 // ============================================================
 // footer
 // ============================================================
-function renderFooter(imgPrefix = "./") {
+function renderFooter(imgPrefix) {
   return `
     <footer>
       <div>
@@ -235,129 +217,7 @@ function renderFooter(imgPrefix = "./") {
 }
 
 // ============================================================
-// productCard
-// ============================================================
-function renderColorPicker(product) {
-  if (!product.colors || product.colors.length === 0) return "";
-
-  if (product.colorSelectorType === "swatch") {
-    const dots = product.colors
-      .map(
-        (color) => `
-        <button
-          type="button"
-          class="card-swatch ${color.cssClass}${color.checked ? " card-swatch--active" : ""}"
-          data-filter="${color.previewFilter}"
-          aria-label="${color.name}"
-        ></button>`
-      )
-      .join("");
-    return `<div class="card-swatches">${dots}</div>`;
-  }
-
-  if (product.colorSelectorType === "card") {
-    const imgs = product.colors
-      .map(
-        (color) => `
-        <button
-          type="button"
-          class="card-color-img${color.checked ? " card-color-img--active" : ""}"
-          data-image="./assets/img/${color.image}"
-          aria-label="${color.label.replace(/<br\s*\/?>/gi, " ")}"
-        ><img src="./assets/img/${color.image}" alt="${color.label.replace(/<br\s*\/?>/gi, " ")}" /></button>`
-      )
-      .join("");
-    return `<div class="card-swatches">${imgs}</div>`;
-  }
-
-  return "";
-}
-
-function renderProductCard(product) {
-  return `
-    <article data-href="./pages/product.html?id=${product.id}">
-      <div class="img_container">
-        <img src="./assets/img/${product.cardImage.src}" alt="${product.cardImage.alt}" />
-      </div>
-      <div class="info_container">
-        <div class="info">
-          <h2 class="product-title">${product.name}</h2>
-          <p class="product-category">${product.category}</p>
-        </div>
-        ${renderColorPicker(product)}
-        <p class="product-price">${product.price}</p>
-        <button class="add_to_cart">Add to Cart</button>
-      </div>
-    </article>
-  `;
-}
-
-// ============================================================
-// productsData
-// ============================================================
-const productsData = [
-  {
-    id: "pixel-buds-pro",
-    name: "Google Pixel Buds Pro",
-    category: "Music & Sound",
-    price: "229 €",
-    deliveryDate: "29 Apr",
-    deliveryZip: "08023",
-    navCategory: "Earbuds",
-    cardImage: {
-      src: "earbuds/earbuds_01.png",
-      alt: "Google Pixel Buds Pro",
-    },
-    heroImage: {
-      src: "earbuds/earbuds_01.png",
-      alt: "Google Pixel Buds Pro - vista frontal con estuche abierto",
-    },
-    thumbnails: [
-      { src: "earbuds/earbuds_01.png", alt: "Google Pixel Buds Pro - vista frontal con estuche abierto" },
-      { src: "earbuds/earbuds_02.png", alt: "Google Pixel Buds Pro - vista lateral" },
-      { src: "earbuds/earbuds_03.png", alt: "Google Pixel Buds Pro - auricular derecho" },
-      { src: "earbuds/earbuds_04.png", alt: "Google Pixel Buds Pro - estuche cerrado" },
-    ],
-    colorSelectorType: "swatch",
-    colors: [
-      { id: "color-blue", cssClass: "swatch-blue", checked: true, name: "Fog", previewFilter: "hue-rotate(0deg) saturate(1) brightness(1)", previewBackground: "#eff3f8" },
-      { id: "color-gray-light", cssClass: "swatch-gray-light", name: "Porcelain", previewFilter: "grayscale(0.15) brightness(1.08) sepia(0.08)", previewBackground: "#f4f1ed" },
-      { id: "color-dark", cssClass: "swatch-dark", name: "Charcoal", previewFilter: "grayscale(0.8) brightness(0.68) contrast(1.1)", previewBackground: "#e8eaed" },
-      { id: "color-gray", cssClass: "swatch-gray", name: "Mist", previewFilter: "grayscale(0.55) brightness(0.96) contrast(1.02)", previewBackground: "#edf1f4" },
-      { id: "color-green", cssClass: "swatch-green", name: "Lemongrass", previewFilter: "sepia(0.35) saturate(1.15) hue-rotate(18deg) brightness(1.02)", previewBackground: "#f1f5e4" },
-      { id: "color-red", cssClass: "swatch-red", name: "Coral", previewFilter: "sepia(0.55) saturate(1.3) hue-rotate(320deg) brightness(0.98)", previewBackground: "#f7ece8" },
-    ],
-    extraStylesheet: null,
-  },
-  {
-    id: "fitbit-inspire-3",
-    name: "Fitbit Inspire 3",
-    category: "Health & Fitness Tracker",
-    price: "99,95 €",
-    deliveryDate: "29 Apr",
-    deliveryZip: "08023",
-    navCategory: "Watches",
-    cardImage: {
-      src: "smartwatch/smartwatch_black.png",
-      alt: "Fitbit Inspire 3",
-    },
-    heroImage: {
-      src: "smartwatch/smartwatch_black.png",
-      alt: "Fitbit Inspire 3 - Midnight Zen",
-    },
-    thumbnails: [],
-    colorSelectorType: "card",
-    colors: [
-      { id: "color-midnight", cssClass: "swatch-midnight", label: "Midnight<br>Zen", image: "smartwatch/smartwatch_black.png", checked: true },
-      { id: "color-lilac", cssClass: "swatch-lilac", label: "Lilac<br>Bliss", image: "smartwatch/smartwatch_pink.png" },
-      { id: "color-morning", cssClass: "swatch-morning", label: "Morning<br>Glow", image: "smartwatch/smartwatch_yellow.png" },
-    ],
-    extraStylesheet: "../styles/watches-style.css",
-  },
-];
-
-// ============================================================
-// cartController
+// UI helpers
 // ============================================================
 function updateBadge() {
   const badge = document.getElementById("cart-badge");
@@ -392,11 +252,113 @@ function closeHelpModal() {
   document.body.style.overflow = "";
 }
 
-function initCartUI(root, imgPrefix, data) {
+// ============================================================
+// Cart page rendering
+// ============================================================
+function renderPaymentMethods(imgPrefix) {
+  return `
+    <div class="cart-payment">
+      <p class="cart-payment__label">Métodos de pago aceptados</p>
+      <div class="cart-payment__icons">
+        <img src="${imgPrefix}assets/icons/PM-paypal.svg"     alt="PayPal"      class="payment-icon" />
+        <img src="${imgPrefix}assets/icons/PM-mastercard.svg" alt="Mastercard"  class="payment-icon" />
+        <img src="${imgPrefix}assets/icons/PM-visa.svg"       alt="Visa"        class="payment-icon" />
+        <img src="${imgPrefix}assets/icons/PM-googlepay.svg"  alt="Google Pay"  class="payment-icon" />
+        <img src="${imgPrefix}assets/icons/PM-bizum.svg"      alt="Bizum"       class="payment-icon" />
+      </div>
+    </div>
+  `;
+}
+
+function renderCartBody(imgPrefix) {
+  const cart = getCart();
+  const { totalPrice } = getCartTotals();
+
+  if (cart.length === 0) {
+    return `
+      <div class="cart-empty">
+        <p>Tu carrito está vacío.</p>
+        <a href="${imgPrefix}index.html" class="btn_back">
+          <img src="${imgPrefix}assets/icons/Arrow.svg" alt="" />
+          Volver al catálogo
+        </a>
+      </div>
+      ${renderPaymentMethods(imgPrefix)}
+    `;
+  }
+
+  const rows = cart
+    .map(
+      (item) => `
+      <tr class="cart-row" data-product-id="${item.id}">
+        <td class="cart-row__img">
+          <img src="${imgPrefix}assets/img/${item.img}" alt="${item.name}" />
+        </td>
+        <td class="cart-row__name">${item.name}</td>
+        <td class="cart-row__price">${formatPrice(item.price)}</td>
+        <td class="cart-row__qty">
+          <div class="cart-qty-ctrl">
+            <button type="button" class="cart-qty-minus" data-product-id="${item.id}" aria-label="Quitar una unidad">−</button>
+            <span class="cart-qty-val">${item.count}</span>
+            <button type="button" class="cart-qty-plus" data-product-id="${item.id}" aria-label="Añadir una unidad">+</button>
+          </div>
+        </td>
+        <td class="cart-row__subtotal">${formatPrice(item.price * item.count)}</td>
+        <td class="cart-row__remove">
+          <button type="button" class="cart-remove" data-product-id="${item.id}" aria-label="Eliminar producto">×</button>
+        </td>
+      </tr>`
+    )
+    .join("");
+
+  return `
+    <div class="cart-table-wrapper">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+
+    <div class="cart-summary">
+      <div class="cart-summary__row">
+        <span>Subtotal</span>
+        <span>${formatPrice(totalPrice)}</span>
+      </div>
+      <div class="cart-summary__row cart-summary__row--total">
+        <span>Total</span>
+        <span>${formatPrice(totalPrice)}</span>
+      </div>
+      <button class="cart-checkout-btn" type="button">Finalizar pedido</button>
+      ${renderPaymentMethods(imgPrefix)}
+    </div>
+  `;
+}
+
+function refreshCartPage(imgPrefix) {
+  const cartContent = document.getElementById("cart-content");
+  if (!cartContent) return;
+  cartContent.innerHTML = renderCartBody(imgPrefix);
+}
+
+// ============================================================
+// initCartUI
+// ============================================================
+function initCartUI(root, imgPrefix) {
   updateBadge();
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeHelpModal();
   });
+
   root.addEventListener("click", (e) => {
     const menuToggle = e.target.closest(".mobile-menu-toggle");
     if (menuToggle) {
@@ -416,23 +378,33 @@ function initCartUI(root, imgPrefix, data) {
       }
       return;
     }
+
     const helpToggle = e.target.closest(".help-toggle");
     if (helpToggle) {
       e.preventDefault();
       openHelpModal();
       return;
     }
-    if (e.target.closest(".help-modal__close") || e.target.closest("[data-help-close='true']")) {
+
+    if (
+      e.target.closest(".help-modal__close") ||
+      e.target.closest("[data-help-close='true']")
+    ) {
       e.preventDefault();
       closeHelpModal();
       return;
     }
+
     if (e.target.closest(".mobile-menu__links a")) {
       const mobileMenu = document.querySelector(".mobile-menu");
       const img = document.querySelector(".mobile-menu-toggle img");
       if (mobileMenu) mobileMenu.classList.add("mobile-menu--hidden");
-      if (img) { img.src = `${imgPrefix}assets/icons/icons-menu.svg`; img.alt = "Menu"; }
+      if (img) {
+        img.src = `${imgPrefix}assets/icons/icons-menu.svg`;
+        img.alt = "Menu";
+      }
     }
+
     const toggle = e.target.closest(".cart-icon__toggle");
     if (toggle) {
       e.preventDefault();
@@ -444,92 +416,49 @@ function initCartUI(root, imgPrefix, data) {
       }
       return;
     }
+
     const plusBtn = e.target.closest(".cart-qty-plus");
     if (plusBtn) {
       e.stopPropagation();
       updateQuantity(plusBtn.dataset.productId, 1);
       refreshDropdown(imgPrefix);
+      refreshCartPage(imgPrefix);
       updateBadge();
       return;
     }
+
     const minusBtn = e.target.closest(".cart-qty-minus");
     if (minusBtn) {
       e.stopPropagation();
       updateQuantity(minusBtn.dataset.productId, -1);
       refreshDropdown(imgPrefix);
+      refreshCartPage(imgPrefix);
       updateBadge();
       return;
     }
+
     if (e.target.closest(".cart-clear")) {
       e.stopPropagation();
       clearCart();
       refreshDropdown(imgPrefix);
+      refreshCartPage(imgPrefix);
       updateBadge();
       return;
     }
-    // Card swatch (earbuds – CSS filter)
-    const swatchBtn = e.target.closest(".card-swatch");
-    if (swatchBtn) {
-      const article = swatchBtn.closest("article[data-href]");
-      const cardImg = article?.querySelector(".img_container img");
-      if (cardImg) cardImg.style.filter = swatchBtn.dataset.filter;
-      if (article) {
-        article.querySelectorAll(".card-swatch").forEach((b) => b.classList.remove("card-swatch--active"));
-        swatchBtn.classList.add("card-swatch--active");
-      }
-      return;
-    }
 
-    // Card color img (watches – image swap)
-    const colorImgBtn = e.target.closest(".card-color-img");
-    if (colorImgBtn) {
-      const article = colorImgBtn.closest("article[data-href]");
-      const cardImg = article?.querySelector(".img_container img");
-      if (cardImg) cardImg.src = colorImgBtn.dataset.image;
-      if (article) {
-        article.querySelectorAll(".card-color-img").forEach((b) => b.classList.remove("card-color-img--active"));
-        colorImgBtn.classList.add("card-color-img--active");
-      }
-      return;
-    }
-
-    const addBtn = e.target.closest(".add_to_cart");
-    if (addBtn) {
-      e.preventDefault();
+    const removeBtn = e.target.closest(".cart-remove");
+    if (removeBtn) {
       e.stopPropagation();
-      const article = addBtn.closest("article[data-href]");
-      if (article) {
-        const href = article.dataset.href;
-        const url = new URL(href, window.location.href);
-        const productId = url.searchParams.get("id");
-        const product = data.find((p) => p.id === productId);
-        if (product) {
-          addToCart(product);
-          updateBadge();
-          refreshDropdown(imgPrefix);
-        }
-        return;
-      }
-      const detailBtn = addBtn.closest(".purchase_details") || addBtn.closest(".select_quantity");
-      if (detailBtn) {
-        const params = new URLSearchParams(window.location.search);
-        const productId = params.get("id");
-        const product = data.find((p) => p.id === productId);
-        if (product) {
-          const quantitySelect = document.getElementById("quantity");
-          const quantity = quantitySelect ? parseInt(quantitySelect.value, 10) : 1;
-          addToCart(product, quantity);
-          updateBadge();
-          refreshDropdown(imgPrefix);
-        }
-      }
+      removeFromCart(removeBtn.dataset.productId);
+      refreshDropdown(imgPrefix);
+      refreshCartPage(imgPrefix);
+      updateBadge();
       return;
     }
+
     const dropdown = document.querySelector(".cart-dropdown");
     if (dropdown && !dropdown.classList.contains("cart-dropdown--hidden")) {
-      const insideDropdown = e.target.closest(".cart-dropdown");
-      const insideCartIcon = e.target.closest(".cart-icon");
-      if (!insideDropdown && !insideCartIcon) {
+      if (!e.target.closest(".cart-dropdown") && !e.target.closest(".cart-icon")) {
         dropdown.classList.add("cart-dropdown--hidden");
       }
     }
@@ -539,41 +468,24 @@ function initCartUI(root, imgPrefix, data) {
 // ============================================================
 // Main
 // ============================================================
+const IMG_PREFIX = "../";
 const root = document.getElementById("root");
 
 root.innerHTML = `
-  ${renderNav(null, "./")}
-  <section id="welcome-message-section" class="welcome-frame" aria-label="Mensaje de bienvenida">
-    <h2 class="welcome-title">Mensaje de bienvenida</h2>
-    <p class="welcome-box">${welcomeMessageText}</p>
-  </section>
-  <main class="home-main">
-    <section class="home-copy" aria-label="Google Store introduction">
-      <p class="home-eyebrow">Google Store</p>
-      <h1 class="home-title">Dispositivos pensados para tu día a día</h1>
-      <p class="home-subtitle">
-        Descubre nuestros earbuds y smartwatches con una presentación limpia,
-        imágenes reales del producto, tipografía Inter y una composición visual
-        inspirada en el ejercicio original de Google Store.
-      </p>
-    </section>
-    <section class="card_container" aria-label="Product catalogue">
-      ${productsData.map(renderProductCard).join("")}
-    </section>
+  ${renderNav(null, IMG_PREFIX)}
+  <main class="cart-page">
+    <div class="cart-page__header">
+      <a href="${IMG_PREFIX}index.html" class="btn_back">
+        <img src="${IMG_PREFIX}assets/icons/Arrow.svg" alt="" />
+        Volver al catálogo
+      </a>
+      <h1 class="cart-page__title">Tu Cesta</h1>
+    </div>
+    <div id="cart-content">
+      ${renderCartBody(IMG_PREFIX)}
+    </div>
   </main>
-  ${renderFooter("./")}
+  ${renderFooter(IMG_PREFIX)}
 `;
 
-initCartUI(root, "./", productsData);
-
-root.addEventListener("click", (event) => {
-  if (event.target.closest(".add_to_cart")) return;
-  if (event.target.closest(".card-swatch")) return;
-  if (event.target.closest(".card-color-img")) return;
-  const article = event.target.closest("article[data-href]");
-  if (!article) {
-    return;
-  }
-
-  window.location.href = article.dataset.href;
-});
+initCartUI(root, IMG_PREFIX);
