@@ -1,161 +1,150 @@
-# Google Store — Product Showcase
+# Google Store — Figma to Code Exercise
 
-A pixel-perfect, responsive product detail page replicating the Google Store experience. Built as a Figma-to-code exercise using semantic HTML5 and CSS3, featuring two product pages: **Google Pixel Buds Pro** and **Fitbit Inspire 3**.
+Responsive Google Store replica built from a Figma design. Features a product catalogue, persistent shopping cart, and mobile-friendly navigation.
 
----
+## Table of Contents
 
-## Live Preview
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Contributing](#contributing)
+- [License](#license)
 
-| Page | Description |
-|------|-------------|
-| `index.html` | Google Pixel Buds Pro — earbuds product detail |
-| `pages/watches.html` | Fitbit Inspire 3 — health & fitness tracker detail |
+## Background
 
----
+Practical exercise from the [Factoria F5](https://factoriaf5.org/) bootcamp, aimed at translating a Figma design into real code using semantic HTML5, mobile-first CSS3, and vanilla JavaScript with ES modules.
 
-## Features
+The project replicates the experience of a Google online store: product listing, individual product detail pages, quantity selector, shopping cart with `localStorage` persistence, and a functional hamburger menu on mobile.
 
-- **Mobile-first responsive design** — seamless across mobile, tablet, and desktop
-- **Interactive color selector** — swatches with live product image preview (watches)
-- **Accessible markup** — semantic HTML5, ARIA attributes, descriptive alt texts, and proper form label associations
-- **CSS Grid + Flexbox layout** — two-column desktop layout with sticky purchase panel
-- **No JavaScript** — all interactivity handled with CSS (`:checked`, `:hover`, transitions)
-- **Google Fonts** — Inter typeface (400, 700)
-- **SVG icon system** — 18 scalable UI icons (navigation, social media, utility)
+## Install
 
----
+The project uses ES modules (`type="module"`), so it cannot be opened directly as a local file — it requires an HTTP server.
 
-## Tech Stack
+**With VS Code:**
 
-| Technology | Usage |
-|------------|-------|
-| HTML5 | Semantic structure, forms, accessibility |
-| CSS3 | Custom properties, Flexbox, Grid, media queries |
-| Google Fonts | Inter typeface |
-| SVG | Scalable UI and social icons |
+```bash
+git clone https://github.com/Adriasu09/02-Ejercicio-Google-Store.git
+cd 02-Ejercicio-Google-Store
+# Open with the Live Server extension (right-click → Open with Live Server)
+```
 
----
+**With Node.js:**
+
+```bash
+git clone https://github.com/Adriasu09/02-Ejercicio-Google-Store.git
+cd 02-Ejercicio-Google-Store
+npx serve .
+```
+
+No production dependencies or build steps required.
+
+## Usage
+
+Open `index.html` from the local server. From there you can:
+
+- **Browse** to each product detail page (Earbuds or Smartwatch)
+- **Select a quantity** using the selector before adding to the cart
+- **Manage the cart** from the navbar dropdown: adjust quantities, clear the cart, or go to checkout
+- **Open the navigation menu** on mobile by tapping the hamburger icon
+
+The cart persists across pages and reloads via `localStorage`.
 
 ## Project Structure
 
 ```
 02-Ejercicio-Google-Store/
-├── index.html               # Pixel Buds Pro product page
+├── index.html                  # Homepage — product catalogue
+├── index.js                    # JS entry point (homepage)
+├── assets/
+│   ├── icons/                  # SVGs and UI icons
+│   └── img/
+│       ├── earbuds/            # Google Pixel Buds Pro images
+│       └── smartwatch/         # Fitbit Inspire 3 images
+├── config/
+│   └── productsData.js         # Product catalogue data
 ├── pages/
-│   └── watches.html         # Fitbit Inspire 3 product page
-├── styles/
-│   ├── style.css            # Base stylesheet (shared, mobile-first)
-│   └── watches_style.css    # Watches page overrides
-└── img/
-    ├── google-logo.png
-    ├── earbuds/             # 4 product images
-    ├── smartwatch/          # 3 product images (black, pink, yellow)
-    └── icons/               # 18 SVG icons
+│   └── product.html            # Product detail page
+├── scripts/
+│   ├── cart/
+│   │   ├── cartController.js   # Cart UI events and logic
+│   │   └── cartService.js      # Cart CRUD and localStorage
+│   ├── components/
+│   │   ├── nav.js              # Navbar and mobile menu
+│   │   ├── footer.js           # Footer
+│   │   ├── productCard.js      # Product card (homepage)
+│   │   ├── productDetail.js    # Product detail view
+│   │   └── cartDropdown.js     # Cart dropdown
+│   └── product.js              # JS entry point (product detail page)
+└── styles/
+    ├── style.css               # Global styles (mobile-first)
+    ├── cart.css                # Cart and dropdown styles
+    └── product.css             # Product detail page styles
 ```
 
----
+## Tech Stack
 
-## CSS Architecture
+| Technology | Usage |
+|------------|-------|
+| HTML5 | Semantic structure and accessibility (ARIA) |
+| CSS3 | Custom properties, Flexbox, Grid, mobile-first media queries |
+| JavaScript (ES Modules) | Cart, dynamic navigation, persistence |
+| localStorage | Cart persistence across pages and sessions |
+| Google Fonts — Inter | Typography |
 
-Styles follow a **mobile-first** strategy with progressive enhancement via media queries:
+**Breakpoints:**
 
-| Breakpoint | Behavior |
-|------------|----------|
-| `< 768px` | Single column, hidden nav links, stacked buttons |
-| `768px – 1023px` | Nav links visible, 2×2 color grid |
-| `≥ 1024px` | Two-column grid, thumbnail gallery, side-by-side purchase panel |
+| Range | Behaviour |
+|-------|-----------|
+| `< 768px` | Single column, hamburger menu |
+| `768px – 1023px` | Nav links visible, partial two-column layout |
+| `≥ 1024px` | Two columns, thumbnail gallery, side purchase panel |
 
-**Design tokens** (CSS custom properties):
+## Contributing
 
-```css
---white, --gray-light, --gray, --gray-dark, --blue
-
---font-primary: "Inter", sans-serif
---title-size: 35px
---subtitle-size: 20px
---text-size: 12px
-```
-
----
-
-## Getting Started
-
-No build tools or dependencies required. Clone the repo and open `index.html` in any modern browser.
-
-```bash
-git clone https://github.com/Adriasu09/02-Ejercicio-Google-Store.git
-cd 02-Ejercicio-Google-Store
-# Open index.html in your browser
-```
-
----
-
-## Git Workflow
-
-This project follows a **feature branch workflow**:
+This repository follows a feature branch workflow:
 
 ```
-main ← develop ← feat/your-feature
+main ← develop ← feature/your-feature
 ```
 
 | Branch | Purpose |
 |--------|---------|
 | `main` | Production-ready code. No direct commits. |
 | `develop` | Integration branch. No direct commits. |
-| `feat/*` | Your personal working branch. |
+| `feature/*` | Personal working branch. |
 
-### Daily workflow
+**Daily workflow:**
 
 ```bash
 # 1. Switch to your branch
-git checkout feat/your-feature
+git checkout feature/your-feature
 
-# 2. Sync with latest changes from develop
+# 2. Sync with the latest changes
 git pull origin develop
 
-# 3. Work on your files...
+# 3. Make your changes...
 
-# 4. Stage and commit your changes
-git add .
-git commit -m "feat(section): brief description of change"
+# 4. Commit
+git add <files>
+git commit -m "feat(scope): brief description"
 
-# 5. Push to remote
-git push origin feat/your-feature
-
-# 6. Open a Pull Request on GitHub targeting develop
+# 5. Push and open a Pull Request targeting develop
+git push origin feature/your-feature
 ```
 
-### Commit message convention
-
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
+**Commit convention** — [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
-feat(navbar): add responsive hamburger menu
-fix(footer): correct social icon alignment on mobile
-refactor(styles): remove unused CSS custom properties
-improve(index): enhance semantic markup and alt texts
+feat(cart): add quantity selector support
+fix(nav): close mobile menu on link click
+style(footer): fix icon alignment on mobile
+refactor(cartService): extract parsePrice helper
 ```
 
-### Common errors
-
-| Error | Fix |
-|-------|-----|
-| `Please commit your changes before merge` | Run `git add . && git commit -m "your message"` first |
-| `Rejected — non-fast-forward` | Run `git pull origin feat/your-feature`, resolve conflicts, then push again |
-| Working on wrong branch | Run `git checkout feat/your-feature` |
-
----
-
-## Contributing
-
-1. Branch off from `develop` — never commit directly to `main` or `develop`
-2. Keep commits small and focused on a single change
-3. Write descriptive commit messages using Conventional Commits format
-4. Open a Pull Request against `develop` with a clear title and description
-5. Address any review comments before the PR is merged
-
----
+Contributions are welcome. Open a Pull Request against `develop` with a clear title and description.
 
 ## License
 
-This project was created for educational purposes as part of the [Factoria F5](https://factoriaf5.org/) bootcamp curriculum.
+Project created for educational purposes as part of the [Factoria F5](https://factoriaf5.org/) bootcamp curriculum. No distribution license.
