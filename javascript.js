@@ -236,6 +236,42 @@ function renderFooter(imgPrefix = "./") {
 // ============================================================
 // productCard
 // ============================================================
+function renderColorPicker(product) {
+  if (!product.colors || product.colors.length === 0) return "";
+
+  if (product.colorSelectorType === "swatch") {
+    const dots = product.colors
+      .map(
+        (color) => `
+        <button
+          type="button"
+          class="card-swatch ${color.cssClass}${color.checked ? " card-swatch--active" : ""}"
+          data-filter="${color.previewFilter}"
+          aria-label="${color.name}"
+        ></button>`
+      )
+      .join("");
+    return `<div class="card-swatches">${dots}</div>`;
+  }
+
+  if (product.colorSelectorType === "card") {
+    const imgs = product.colors
+      .map(
+        (color) => `
+        <button
+          type="button"
+          class="card-color-img${color.checked ? " card-color-img--active" : ""}"
+          data-image="./assets/img/${color.image}"
+          aria-label="${color.label.replace(/<br\s*\/?>/gi, " ")}"
+        ><img src="./assets/img/${color.image}" alt="${color.label.replace(/<br\s*\/?>/gi, " ")}" /></button>`
+      )
+      .join("");
+    return `<div class="card-swatches">${imgs}</div>`;
+  }
+
+  return "";
+}
+
 function renderProductCard(product) {
   return `
     <article data-href="./pages/product.html?id=${product.id}">
@@ -247,6 +283,7 @@ function renderProductCard(product) {
           <h2 class="product-title">${product.name}</h2>
           <p class="product-category">${product.category}</p>
         </div>
+        ${renderColorPicker(product)}
         <p class="product-price">${product.price}</p>
         <button class="add_to_cart">Add to Cart</button>
       </div>
@@ -429,6 +466,32 @@ function initCartUI(root, imgPrefix, data) {
       updateBadge();
       return;
     }
+    // Card swatch (earbuds – CSS filter)
+    const swatchBtn = e.target.closest(".card-swatch");
+    if (swatchBtn) {
+      const article = swatchBtn.closest("article[data-href]");
+      const cardImg = article?.querySelector(".img_container img");
+      if (cardImg) cardImg.style.filter = swatchBtn.dataset.filter;
+      if (article) {
+        article.querySelectorAll(".card-swatch").forEach((b) => b.classList.remove("card-swatch--active"));
+        swatchBtn.classList.add("card-swatch--active");
+      }
+      return;
+    }
+
+    // Card color img (watches – image swap)
+    const colorImgBtn = e.target.closest(".card-color-img");
+    if (colorImgBtn) {
+      const article = colorImgBtn.closest("article[data-href]");
+      const cardImg = article?.querySelector(".img_container img");
+      if (cardImg) cardImg.src = colorImgBtn.dataset.image;
+      if (article) {
+        article.querySelectorAll(".card-color-img").forEach((b) => b.classList.remove("card-color-img--active"));
+        colorImgBtn.classList.add("card-color-img--active");
+      }
+      return;
+    }
+
     const addBtn = e.target.closest(".add_to_cart");
     if (addBtn) {
       e.preventDefault();
@@ -504,6 +567,8 @@ initCartUI(root, "./", productsData);
 
 root.addEventListener("click", (event) => {
   if (event.target.closest(".add_to_cart")) return;
+  if (event.target.closest(".card-swatch")) return;
+  if (event.target.closest(".card-color-img")) return;
   const article = event.target.closest("article[data-href]");
   if (!article) {
     return;

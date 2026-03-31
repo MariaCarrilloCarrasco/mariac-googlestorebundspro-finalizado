@@ -443,6 +443,59 @@ input[type="radio"] {
     background-color: #e18472;
 }
 
+/* === CARD COLOR SWATCHES (home page) === */
+.card-swatches {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 2px;
+}
+
+.card-swatch {
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    height: 20px;
+    outline: 1.5px solid transparent;
+    outline-offset: 2px;
+    padding: 0;
+    transition: outline 0.1s ease;
+    width: 20px;
+}
+
+.card-swatch:hover,
+.card-swatch--active {
+    outline-color: var(--gray-dark);
+}
+
+.card-color-img {
+    align-items: center;
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    padding: 3px;
+    transition: border-color 0.1s ease;
+    width: 40px;
+}
+
+.card-color-img img {
+    object-fit: contain;
+    width: 100%;
+}
+
+.card-color-img:hover,
+.card-color-img--active {
+    border-color: var(--gray-dark);
+    outline: 1px solid var(--gray-dark);
+    outline-offset: 1px;
+}
+
 /* === WELCOME MESSAGE === */
 .welcome-frame {
     background-color: var(--blue-light);
