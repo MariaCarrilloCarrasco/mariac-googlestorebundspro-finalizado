@@ -185,7 +185,7 @@ function renderNav(activeCategory, imgPrefix = "./") {
           ${renderCartDropdown(imgPrefix)}
         </li>
         <li>
-          <a href="#"><img class="icon" src="${imgPrefix}assets/icons/Avatar.svg" alt="Account" /></a>
+          <a href="#" class="profile-toggle" aria-label="Abrir mensaje de bienvenida"><img class="icon" src="${imgPrefix}assets/icons/Avatar.svg" alt="Account" /></a>
         </li>
         <li class="menu">
           <a href="#" class="mobile-menu-toggle"><img class="icon" src="${imgPrefix}assets/icons/icons-menu.svg" alt="Menu" /></a>
@@ -418,6 +418,12 @@ function initCartUI(root, imgPrefix, data) {
     }
     const helpToggle = e.target.closest(".help-toggle");
     if (helpToggle) {
+      e.preventDefault();
+      openHelpModal();
+      return;
+    }
+    const profileToggle = e.target.closest(".profile-toggle");
+    if (profileToggle) {
       e.preventDefault();
       openHelpModal();
       return;

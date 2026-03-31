@@ -60,7 +60,7 @@ export function renderNav(activeCategory, imgPrefix = "./") {
           ${renderCartDropdown(imgPrefix)}
         </li>
         <li>
-          <a href="#"><img class="icon" src="${imgPrefix}assets/icons/Avatar.svg" alt="Account" /></a>
+          <a href="#" class="profile-toggle" aria-label="Abrir mensaje de bienvenida"><img class="icon" src="${imgPrefix}assets/icons/Avatar.svg" alt="Account" /></a>
         </li>
         <li class="menu">
           <a href="#" class="mobile-menu-toggle"><img class="icon" src="${imgPrefix}assets/icons/icons-menu.svg" alt="Menu" /></a>

@@ -73,6 +73,13 @@ export function initCartUI(root, imgPrefix, productsData) {
       return;
     }
 
+    const profileToggle = e.target.closest(".profile-toggle");
+    if (profileToggle) {
+      e.preventDefault();
+      openHelpModal();
+      return;
+    }
+
     if (e.target.closest(".help-modal__close") || e.target.closest("[data-help-close='true']")) {
       e.preventDefault();
       closeHelpModal();
